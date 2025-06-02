@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
+import store from "@/redux/store";
 
 export const metadata: Metadata = {
   title: "Working with Axios",
@@ -14,10 +15,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`flex justify-center items-center h-screen antialiased`}
-      >
-        {children}
+      <body className={`flex justify-center items-center h-screen antialiased`}>
+        <Provider store={store}>{children}</Provider>
       </body>
     </html>
   );
