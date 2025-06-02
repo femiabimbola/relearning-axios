@@ -1,3 +1,5 @@
+
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { Provider } from "react-redux";
@@ -16,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`flex justify-center items-center h-screen antialiased`}>
-        <Provider store={store}>{children}</Provider>
+        {children}
       </body>
     </html>
   );

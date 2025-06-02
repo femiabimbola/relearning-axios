@@ -1,7 +1,11 @@
+import { List } from "@/components/List";
+import ReduxProvider from "./providers";
+
 const  Home = () =>{
   return (
-    <div> The home Page</div>
-  );
+      <List />
+  )
+    
 }
 
 export default Home

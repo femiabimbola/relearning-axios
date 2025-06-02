@@ -9,4 +9,4 @@ Then, I proceeded to create reducer.ts, this makes uses of the action, each acti
 
 Then I create store using the reducers
 
-Then I put the store in the root of the application
+I then create a file called provider.tsx at the root of the application
