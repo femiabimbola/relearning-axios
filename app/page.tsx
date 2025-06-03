@@ -3,7 +3,10 @@ import ReduxProvider from "./providers";
 
 const  Home = () =>{
   return (
-      <List />
+    <ReduxProvider>
+       <List />
+    </ReduxProvider>
+     
   )   
 }
 
