@@ -4,8 +4,7 @@ import ReduxProvider from "./providers";
 const  Home = () =>{
   return (
       <List />
-  )
-    
+  )   
 }
 
 export default Home

@@ -10,3 +10,5 @@ Then, I proceeded to create reducer.ts, this makes uses of the action, each acti
 Then I create store using the reducers
 
 I then create a file called provider.tsx at the root of the application
+
+Then check the code in the provider.tsx
