@@ -5,13 +5,13 @@ import { createUser, getAllUser, userDelete, userUpdate } from "./action";
 interface Users {
   loading: boolean;
   users: any[]; // You might want to define a more specific type for users
-  error: string;
+  error: string | null;
 }
 
 const initialState: Users = {
   loading: false,
   users: [],
-  error: "",
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -25,6 +25,7 @@ const userSlice = createSlice({
     builder
     .addCase(getAllUser.pending, (state)=>{
         state.loading = true;
+        state.error = null;
     })
     .addCase(getAllUser.fulfilled ,(state,action)=>{
         state.loading = false;

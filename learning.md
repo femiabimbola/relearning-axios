@@ -12,3 +12,5 @@ Then I create store using the reducers
 I then create a file called provider.tsx at the root of the application
 
 Then check the code in the provider.tsx
+
+<!-- https://grok.com/share/c2hhcmQtMg%3D%3D_5ab6b607-aafe-4e70-b9a0-c83d90c597ce -->

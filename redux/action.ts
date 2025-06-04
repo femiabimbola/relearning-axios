@@ -1,16 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getAllUser = createAsyncThunk ('getAllUser',async()=>{
+export const getAllUser = createAsyncThunk ('getAllUser', async(_, { rejectWithValue })=>{
 
   try {
       const user = await axios.get("https://64a2d298b45881cc0ae5c169.mockapi.io/user");
-      console.log(user)
       return user.data
 
-  } catch (error) {
+  } catch (error: any) {
       // console.log(error)
-      return Promise.reject(error)
+      // return Promise.reject(error)
+      return rejectWithValue(error.response?.data || 'Error fetching users');
   }
 })
 
