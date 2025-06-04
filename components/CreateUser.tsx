@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
+import { AppDispatch, RootState } from '@/redux/store';
 import {
   Form,
   FormControl,
@@ -14,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useDispatch, useSelector } from 'react-redux'
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -31,6 +33,8 @@ const formSchema = z.object({
 })
 
 export const CreateUser = () => {
+
+  const dispatch = useDispatch<AppDispatch>()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -99,7 +103,7 @@ export const CreateUser = () => {
           </FormItem>
         )}
       />
-      <Button type="submit" className="text-center">Submit</Button>
+      <Button type="submit" className="w-[2/3]">Submit</Button>
     </form>
   </Form>
   )

@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import  { useEffect } from 'react'
 import { getAllUser, userDelete } from "@/redux/action";
 import { AppDispatch, RootState } from '@/redux/store';
+import { Button } from "./ui/button";
 
 
 export const List = () => {
@@ -31,14 +32,15 @@ export const List = () => {
   }
 
   return (
-  
+      <div>
+        <h1 className="text-center text-2xl font-bold"> All the Users</h1>
       <Table className="w-2/3 mx-auto">
         <TableHeader>
           <TableRow>
             <TableHead >Name</TableHead>
             <TableHead>email</TableHead>
             <TableHead>Gender</TableHead>
-            <TableHead className="text-right">Salary</TableHead>
+            <TableHead className="">Salary</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -47,11 +49,12 @@ export const List = () => {
             <TableCell className="font-medium">{user.name}</TableCell>
             <TableCell>{user.email}</TableCell>
             <TableCell>{user.gender}</TableCell>
-            <TableCell className="text-right">{user.salary}</TableCell>
+            <TableCell className="">{user.salary}</TableCell>
+            <Button className="my-3 cursor-pointer"> Edit</Button>
           </TableRow>
         ))}
       </TableBody>
       </Table>
-  
+      </div>
   );
 };
