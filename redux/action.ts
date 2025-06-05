@@ -1,6 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+export interface CreateUserPayload {
+  name: string;
+  email: string;
+  gender: string;
+  salary: number; //
+}
+
 export const getAllUser = createAsyncThunk ('getAllUser', async(_, { rejectWithValue })=>{
 
   try {
@@ -14,7 +21,7 @@ export const getAllUser = createAsyncThunk ('getAllUser', async(_, { rejectWithV
   }
 })
 
-export const createUser = createAsyncThunk('create',async (data)=>{
+export const createUser = createAsyncThunk('create',async (data: CreateUserPayload)=>{
   try {
       const user = await axios.post("https://64a2d298b45881cc0ae5c169.mockapi.io/user",data)
       return user.data

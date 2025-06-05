@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { AppDispatch, RootState } from '@/redux/store';
+import { createUser } from "@/redux/action"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,12 +24,10 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  gender: z.string().email({
-    message: "Please enter a valid email address.",
+  gender: z.string().min(3, {
+    message: "Please enter your gender.",
   }),
-  salary: z.number().min(0, {
-    message: "Salary must be a non-negative number.",
-  }),
+  salary: z.coerce.number().nonnegative({ message: "Salary must be a non-negative number." }),
 })
 
 export const CreateUser = () => {
@@ -44,7 +42,8 @@ export const CreateUser = () => {
   })
 
    const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+    // console.log(values)
+    dispatch(createUser(values));
   }
 
   return (

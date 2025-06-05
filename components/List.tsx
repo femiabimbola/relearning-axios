@@ -14,6 +14,7 @@ import  { useEffect } from 'react'
 import { getAllUser, userDelete } from "@/redux/action";
 import { AppDispatch, RootState } from '@/redux/store';
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 
 export const List = () => {
@@ -50,7 +51,7 @@ export const List = () => {
             <TableCell>{user.email}</TableCell>
             <TableCell>{user.gender}</TableCell>
             <TableCell className="">{user.salary}</TableCell>
-            <Button className="my-3 cursor-pointer"> Edit</Button>
+            <Link href="">Edit</Link>
           </TableRow>
         ))}
       </TableBody>
