@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createUser, getAllUser, userDelete, userUpdate } from "./action";
 
-interface Users {
+export interface Users {
   loading: boolean;
   users: any[]; // You might want to define a more specific type for users
   error: string | null;
