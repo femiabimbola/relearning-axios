@@ -5,9 +5,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { AppDispatch, RootState } from "@/redux/store";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { createUser } from "@/redux/action";
+import { createUser, userUpdate } from "@/redux/action";
 import {
   Form,
   FormControl,
@@ -55,6 +54,11 @@ export const CreateUser = () => {
     form.reset();
   };
 
+  const onUpdate = () => {
+    // dispatch(userUpdate())
+    form.reset()
+  }
+
   return (
     <Form {...form}>
       <h1 className="text-center text-2xl font-bold"> Register a new user</h1>
@@ -95,21 +99,21 @@ export const CreateUser = () => {
             <FormItem>
               <FormLabel>Gender</FormLabel>
               <RadioGroup
-                className=" flex gap-4"
-                // onValueChange={field.onChange}
+                className=" flex gap-8"
+                onValueChange={field.onChange}
                 // defaultValue={field.value}
               >
                 <div className="flex items-center gap-3">
                   <FormControl>
-                    <RadioGroupItem value="Male" />
+                    <RadioGroupItem value="male" />
                   </FormControl>
-                  <Label htmlFor="r1"> Male </Label>
+                  <FormLabel>Male</FormLabel>
                 </div>
                 <div className="flex items-center gap-3">
                   <FormControl>
-                    <RadioGroupItem value="Female" />
+                    <RadioGroupItem value="female" />
                   </FormControl>
-                  <Label htmlFor="r2"> Female </Label>
+                  <FormLabel>Female</FormLabel>
                 </div>
               </RadioGroup>
               <FormMessage />

@@ -50,6 +50,7 @@ export const List = () => {
             <TableHead>email</TableHead>
             <TableHead>Gender</TableHead>
             <TableHead className="">Salary</TableHead>
+            <TableHead className="">Delete</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
