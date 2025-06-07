@@ -21,7 +21,7 @@ export const getAllUser = createAsyncThunk ('getAllUser', async(_, { rejectWithV
   }
 })
 
-export const createUser = createAsyncThunk('create',async (data: CreateUserPayload)=>{
+export const createUser = createAsyncThunk('user/createUser',async (data: CreateUserPayload)=>{
   try {
       const user = await axios.post("https://64a2d298b45881cc0ae5c169.mockapi.io/user",data)
       return user.data
@@ -31,7 +31,7 @@ export const createUser = createAsyncThunk('create',async (data: CreateUserPaylo
 })
 
 
-export const userDelete = createAsyncThunk('delete',async (id)=>{
+export const userDelete = createAsyncThunk('delete', async (id)=>{
   try {  
       const user = await axios.delete(`https://64a2d298b45881cc0ae5c169.mockapi.io/user/${id}`)
       return user.data
