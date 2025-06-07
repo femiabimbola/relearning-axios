@@ -28,6 +28,10 @@ export const List = () => {
     dispatch(userDelete(id));
   };
 
+  const onEdit = () => {
+ 
+  };
+
   if (loading) {
     return <h1>Loading...</h1>;
   }
