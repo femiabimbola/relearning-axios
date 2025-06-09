@@ -11,20 +11,22 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllUser, userDelete } from "@/redux/action";
-import { AppDispatch, RootState } from "@/redux/store";
+import { AppDispatch,  } from "@/redux/store";
 import { Button } from "./ui/button";
 import { Users } from "@/redux/reducers/UserReducer";
+import { setInput,setEdit, setId, resetForm } from "@/redux/reducers/formReducer";
 
 export const List = () => {
   const dispatch = useDispatch<AppDispatch>();
-  // This is from the store
-  const { loading, users, error, edit } = useSelector((state: any) => state.users);
+  // This is from the stores
+  const { loading, users, error } = useSelector((state: any) => state.users);
+  const { input, edit, id } = useSelector((state: any) => state.form);
 
-  const [getInput, setInput] = useState({
-    name: "", email: "", salary: "", gender: "",
-  });
-  const [getEdit, setEdit] = useState(false);
-  const [getId,setId] = useState()
+  // const [getInput, setInput] = useState({
+  //   name: "", email: "", salary: "", gender: "",
+  // });
+  // const [getEdit, setEdit] = useState(false);
+  // const [getId,setId] = useState()
 
   useEffect(() => {
     dispatch(getAllUser());
@@ -36,16 +38,23 @@ export const List = () => {
 
 
   const onEdit = (id: any) => {
-    setInput({
-      ...getInput,
+
+    if (!users[id]) {
+      console.error('User not found');
+      return;
+    }
+    dispatch(setInput({
       name: users[id].name,
       email: users[id].email,
       salary: users[id].salary,
       gender: users[id].gender,
-    });
-    console.log(getInput)
-    setEdit(true);
-    // setId(users[index].id)
+    }));
+    
+    console.log(input);
+    
+    dispatch(setEdit(true));
+    
+    dispatch(setId(users[id].id));
   };
 
   if (loading) {

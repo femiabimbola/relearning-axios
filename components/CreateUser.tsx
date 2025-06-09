@@ -38,8 +38,8 @@ const formSchema = z.object({
 
 export const CreateUser = ({getEdit}: any) => {
 
-  const { edit } = useSelector((state: any) => state.users);
   const dispatch = useDispatch<AppDispatch>();
+  const { input, edit, id } = useSelector((state: any) => state.form);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,6 +55,8 @@ export const CreateUser = ({getEdit}: any) => {
     dispatch(createUser(values));
     form.reset();
   };
+
+  console.log("The create user",input)
 
   const onUpdate = () => {
     // dispatch(userUpdate())
