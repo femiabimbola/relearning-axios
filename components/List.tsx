@@ -35,16 +35,17 @@ export const List = () => {
   };
 
 
-  const onEdit = (index: any) => {
+  const onEdit = (id: any) => {
     setInput({
-      ...getInput,
-      name: users[index].name,
-      email: users[index].email,
-      salary: users[index].salary,
-      gender: users[index].gender,
+      // ...getInput,
+      name: users[id].name,
+      email: users[id].email,
+      salary: users[id].salary,
+      gender: users[id].gender,
     });
+    console.log(getInput)
     setEdit(true);
-    setId(users[index].id)
+    // setId(users[index].id)
   };
 
   if (loading) {
@@ -69,7 +70,7 @@ export const List = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.map((user: any) => (
+          {users.map((user: any, index: number) => (
             <TableRow key={user.id}>
               <TableCell className="font-medium">{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
@@ -85,7 +86,7 @@ export const List = () => {
               </TableCell>
               <TableCell>
                 <Button
-                  onClick={() => onEdit(user.id)}
+                  onClick={() => onEdit(index)}
                   className="cursor-pointer"
                 >
                   Edit

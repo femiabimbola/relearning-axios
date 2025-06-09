@@ -20,7 +20,6 @@ const userSlice = createSlice({
   initialState,
 
   reducers: {
-    
   },
 
   extraReducers: (builder) => {
