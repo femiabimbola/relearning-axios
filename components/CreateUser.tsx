@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,7 +36,9 @@ const formSchema = z.object({
     .nonnegative({ message: "Salary must be a non-negative number." }),
 });
 
-export const CreateUser = () => {
+export const CreateUser = ({getEdit}: any) => {
+
+  const { edit } = useSelector((state: any) => state.users);
   const dispatch = useDispatch<AppDispatch>();
 
   const form = useForm<z.infer<typeof formSchema>>({

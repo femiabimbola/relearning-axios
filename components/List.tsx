@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAllUser, userDelete } from "@/redux/action";
 import { AppDispatch, RootState } from "@/redux/store";
 import { Button } from "./ui/button";
@@ -18,7 +18,13 @@ import { Users } from "@/redux/reducer";
 export const List = () => {
   const dispatch = useDispatch<AppDispatch>();
   // This is from the store
-  const { loading, users, error } = useSelector((state: any) => state.users);
+  const { loading, users, error, edit } = useSelector((state: any) => state.users);
+
+  const [getInput, setInput] = useState({
+    name: "", email: "", salary: "", gender: "",
+  });
+  const [getEdit, setEdit] = useState(false);
+  const [getId,setId] = useState()
 
   useEffect(() => {
     dispatch(getAllUser());
@@ -28,8 +34,17 @@ export const List = () => {
     dispatch(userDelete(id));
   };
 
-  const onEdit = () => {
- 
+
+  const onEdit = (index: any) => {
+    setInput({
+      ...getInput,
+      name: users[index].name,
+      email: users[index].email,
+      salary: users[index].salary,
+      gender: users[index].gender,
+    });
+    setEdit(true);
+    setId(users[index].id)
   };
 
   if (loading) {
@@ -70,7 +85,7 @@ export const List = () => {
               </TableCell>
               <TableCell>
                 <Button
-                  onClick={() => {}}
+                  onClick={() => onEdit(user.id)}
                   className="cursor-pointer"
                 >
                   Edit

@@ -5,19 +5,23 @@ export interface Users {
   loading: boolean;
   users: any[]; // You might want to define a more specific type for users
   error: string | null;
+  edit: boolean;
 }
 
 const initialState: Users = {
   loading: false,
   users: [],
   error: null,
+  edit:false
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
 
-  reducers: {},
+  reducers: {
+    
+  },
 
   extraReducers: (builder) => {
     // Get all
