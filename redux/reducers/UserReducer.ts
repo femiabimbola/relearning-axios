@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createUser, getAllUser, userDelete, userUpdate } from "./action";
+import { createUser, getAllUser, userDelete, userUpdate } from "../action";
 
 export interface Users {
   loading: boolean;

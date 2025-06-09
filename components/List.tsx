@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { getAllUser, userDelete } from "@/redux/action";
 import { AppDispatch, RootState } from "@/redux/store";
 import { Button } from "./ui/button";
-import { Users } from "@/redux/reducer";
+import { Users } from "@/redux/reducers/UserReducer";
 
 export const List = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -37,7 +37,7 @@ export const List = () => {
 
   const onEdit = (id: any) => {
     setInput({
-      // ...getInput,
+      ...getInput,
       name: users[id].name,
       email: users[id].email,
       salary: users[id].salary,
