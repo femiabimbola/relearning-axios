@@ -20,13 +20,8 @@ export const List = () => {
   const dispatch = useDispatch<AppDispatch>();
   // This is from the stores
   const { loading, users, error } = useSelector((state: any) => state.users);
-  const { input, edit, id } = useSelector((state: any) => state.form);
+  // const { input, edit, id } = useSelector((state: any) => state.form);
 
-  // const [getInput, setInput] = useState({
-  //   name: "", email: "", salary: "", gender: "",
-  // });
-  // const [getEdit, setEdit] = useState(false);
-  // const [getId,setId] = useState()
 
   useEffect(() => {
     dispatch(getAllUser());
@@ -50,11 +45,10 @@ export const List = () => {
       gender: users[id].gender,
     }));
     
-    console.log(input);
-    
+    dispatch(setId(users[id].id));
     dispatch(setEdit(true));
     
-    dispatch(setId(users[id].id));
+    
   };
 
   if (loading) {

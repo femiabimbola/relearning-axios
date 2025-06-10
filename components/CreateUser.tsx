@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useDispatch, useSelector} from "react-redux";
+import { setInput, setEdit, setId, resetForm } from "@/redux/reducers/formReducer";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,17 +38,17 @@ const formSchema = z.object({
     .nonnegative({ message: "Salary must be a non-negative number." }),
 });
 
-export const CreateUser = ({getEdit}: any) => {
+export const CreateUser = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const { input, edit, id } = useSelector((state: any) => state.form);
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    // resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      gender: undefined,
+      name: input.name,
+      email: input.email,
+      gender: "male",
       salary: 0,
     },
   });
@@ -56,10 +58,19 @@ export const CreateUser = ({getEdit}: any) => {
     form.reset();
   };
 
-  console.log("The create user",input)
+  const onChangeHandler = (e: any) => {
+    dispatch(setInput({ [e.target.name]: e.target.value }));
+    console.log("The console in the change", id, input)
+  };
+  
+  useEffect(() =>{
+    console.log(id)
+    console.log(input)
+  })
 
   const onUpdate = () => {
-    // dispatch(userUpdate())
+    console.log(id, input)
+    dispatch(userUpdate({id, input}))
     form.reset()
   }
 
@@ -77,7 +88,7 @@ export const CreateUser = ({getEdit}: any) => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your name" {...field} />
+                <Input placeholder="Enter your name" {...field} value={input.name}  onChange={onChangeHandler} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,7 +101,7 @@ export const CreateUser = ({getEdit}: any) => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" {...field} />
+                <Input placeholder="Enter your email" {...field} value={input.email}  onChange={onChangeHandler}/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -103,9 +114,11 @@ export const CreateUser = ({getEdit}: any) => {
             <FormItem>
               <FormLabel>Gender</FormLabel>
               <RadioGroup
-                className=" flex gap-8"
-                onValueChange={field.onChange}
-                // defaultValue={field.value}
+                className="flex gap-8"
+                // onValueChange={onChangeHandler}
+                onChange={onChangeHandler}
+                // onValueChange={field.onChange}
+                // value={input.gender}
               >
                 <div className="flex items-center gap-3">
                   <FormControl>
@@ -131,15 +144,20 @@ export const CreateUser = ({getEdit}: any) => {
             <FormItem>
               <FormLabel>Salary</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your Salary" {...field} />
+                <Input placeholder="Enter your Salary" {...field} value={input.salary}  onChange={onChangeHandler}/>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-[2/3] cursor-pointer">
-          Submit
+        { edit ? (
+        <Button  className="w-[2/3] cursor-pointer" onClick={onUpdate} type="submit">
+          Update
         </Button>
+        ):  <Button type="submit" className="w-[2/3] cursor-pointer">
+        Submit
+      </Button>
+}
       </form>
     </Form>
   );
