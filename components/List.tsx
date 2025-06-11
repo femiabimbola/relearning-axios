@@ -48,7 +48,6 @@ export const List = () => {
     dispatch(setId(users[id].id));
     dispatch(setEdit(true));
     
-    
   };
 
   if (loading) {

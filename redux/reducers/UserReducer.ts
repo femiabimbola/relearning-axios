@@ -72,7 +72,6 @@ const userSlice = createSlice({
         state.error = action.error.message as string;
       })
 
-
       .addCase(userUpdate.pending, (state) => {
         state.loading = true;
       })

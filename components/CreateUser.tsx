@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { AppDispatch, RootState } from "@/redux/store";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { createUser, userUpdate } from "@/redux/action";
+import axios from "axios";
 import {
   Form,
   FormControl,
@@ -62,10 +63,11 @@ export const CreateUser = () => {
   }, [edit, input, form]);
 
   // Single submit handler for both create and update
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit =  async (values: z.infer<typeof formSchema>) => {
     if (edit) {
-    
-      dispatch(userUpdate({ id, ...values })); // Update existing user
+      console.log("Before dispatching", id)
+      // await axios.put(`https://64a2d298b45881cc0ae5c169.mockapi.io/user/${id}`, values)
+      dispatch(userUpdate({ id, values })); // Update existing user
     } else {
       dispatch(createUser(values)); // Create new user
     }

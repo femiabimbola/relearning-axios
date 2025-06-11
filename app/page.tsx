@@ -7,7 +7,7 @@ const  Home = () =>{
   return (
     <ReduxProvider>
       {/* <CreateUser /> */}
-      <CreateUser2/>
+      <CreateUser/>
        <List />
     </ReduxProvider>
      

@@ -41,11 +41,10 @@ export const userDelete = createAsyncThunk('delete', async (id)=>{
 
 })
 
-export const userUpdate = createAsyncThunk('update', async ({getId, getInput}: any)=>{
-
+export const userUpdate = createAsyncThunk('update', async ({id, values}: any)=>{
   try {
-      const user =await axios.put(`https://64a2d298b45881cc0ae5c169.mockapi.io/user/${getId}`,getInput)
-      return user.data
+    const user =await axios.put(`https://64a2d298b45881cc0ae5c169.mockapi.io/user/${id}`, values)
+    return user.data
   } catch (error) {
       Promise.reject(error)
   }
