@@ -37,16 +37,16 @@ const formSchema = z.object({
     .nonnegative({ message: "Salary must be a non-negative number." }),
 });
 
-export const CreateUser = () => {
+export const CreateUser2 = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { input, edit, id } = useSelector((state: RootState) => state.form);
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema), // Enable Zod validation
+    resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
-      gender: "male" ,
+      gender: "male",
       salary: 0,
     },
   });
@@ -54,8 +54,15 @@ export const CreateUser = () => {
   // Sync form values with Redux state when switching to edit mode
   useEffect(() => {
     if (edit && input) {
+      // Transform input to match formSchema type
+      const transformedInput = {
+        name: input.name || "",
+        email: input.email || "",
+        gender: input.gender === "male" || input.gender === "female" ? input.gender : "male",
+        salary: typeof input.salary === "string" ? parseFloat(input.salary) || 0 : input.salary || 0,
+      };
       // @ts-ignore
-      form.reset(input); // Load user data into form in edit mode
+      form.reset(transformedInput); // Load transformed user data into form
     } else {
       form.reset({ name: "", email: "", gender: "male", salary: 0 }); // Reset for create mode
     }
@@ -64,13 +71,12 @@ export const CreateUser = () => {
   // Single submit handler for both create and update
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (edit) {
-    
       dispatch(userUpdate({ id, ...values })); // Update existing user
     } else {
       dispatch(createUser(values)); // Create new user
     }
     form.reset(); // Reset form fields
-    dispatch(resetForm()); // Reset Redux form state (edit, id, input)
+    dispatch(resetForm()); // Reset Redux form state
   };
 
   return (
